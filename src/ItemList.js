@@ -16,6 +16,7 @@ export default class ItemsList extends Component {
     getItemId: PropTypes.func.isRequired,
     theme: PropTypes.func.isRequired,
     keyPrefix: PropTypes.string.isRequired,
+    isInfiniteScroll: PropTypes.bool,
     infiniteDataLength: PropTypes.number,
     infiniteNext: PropTypes.func,
     infiniteHasMore: PropTypes.bool,
@@ -54,6 +55,7 @@ export default class ItemsList extends Component {
       getItemId,
       theme,
       keyPrefix,
+      isInfiniteScroll,
       infiniteDataLength,
       infiniteNext,
       infiniteHasMore,
@@ -75,17 +77,57 @@ export default class ItemsList extends Component {
         id="infinite-scroll-container"
         {...theme(`${sectionPrefix}items-list`, 'itemsList')}
       >
-        <InfiniteScroll
-          dataLength={infiniteDataLength}
-          next={infiniteNext}
-          hasMore={infiniteHasMore}
-          loader={infiniteLoader}
-          endMessage={infiniteEndMessage}
-          className={infiniteClassName}
-          inverse={infiniteInverse}
-          scrollableTarget={infiniteScrollableTarget}
-        >
-          {items.map((item, itemIndex) => {
+        {isInfiniteScroll ?
+          <InfiniteScroll
+            dataLength={infiniteDataLength}
+            next={infiniteNext}
+            hasMore={infiniteHasMore}
+            loader={infiniteLoader}
+            endMessage={infiniteEndMessage}
+            className={infiniteClassName}
+            inverse={infiniteInverse}
+            scrollableTarget={infiniteScrollableTarget}
+          >
+            {items.map((item, itemIndex) => {
+              const isFirst = itemIndex === 0;
+              const isHighlighted = itemIndex === highlightedItemIndex;
+              const itemKey = `${sectionPrefix}item-${itemIndex}`;
+              const itemPropsObj = isItemPropsFunction
+                ? itemProps({ sectionIndex, itemIndex })
+                : itemProps;
+              const allItemProps = {
+                id: getItemId(sectionIndex, itemIndex),
+                'aria-selected': isHighlighted,
+                ...theme(
+                  itemKey,
+                  'item',
+                  isFirst && 'itemFirst',
+                  isHighlighted && 'itemHighlighted'
+                ),
+                ...itemPropsObj,
+              };
+
+              if (isHighlighted) {
+                allItemProps.ref = this.storeHighlightedItemReference;
+              }
+
+              // `key` is provided by theme()
+              /* eslint-disable react/jsx-key */
+              return (
+                <Item
+                  {...allItemProps}
+                  sectionIndex={sectionIndex}
+                  isHighlighted={isHighlighted}
+                  itemIndex={itemIndex}
+                  item={item}
+                  renderItem={renderItem}
+                  renderItemData={renderItemData}
+                />
+              );
+              /* eslint-enable react/jsx-key */
+            })}
+          </InfiniteScroll>
+        : items.map((item, itemIndex) => {
             const isFirst = itemIndex === 0;
             const isHighlighted = itemIndex === highlightedItemIndex;
             const itemKey = `${sectionPrefix}item-${itemIndex}`;
@@ -122,8 +164,8 @@ export default class ItemsList extends Component {
               />
             );
             /* eslint-enable react/jsx-key */
-          })}
-        </InfiniteScroll>
+          })
+        }
       </ul>
     );
   }

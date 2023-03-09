@@ -96,6 +96,7 @@ export default class Autosuggest extends Component {
     theme: PropTypes.object,
     id: PropTypes.string,
     containerProps: PropTypes.object, // Arbitrary container props
+    isInfiniteScroll: PropTypes.bool,
     infiniteDataLength: PropTypes.number,
     infiniteNext: PropTypes.func,
     infiniteHasMore: PropTypes.bool,
@@ -565,6 +566,7 @@ export default class Autosuggest extends Component {
       alwaysRenderSuggestions,
       highlightFirstSuggestion,
       containerProps,
+      isInfiniteScroll,
       infiniteDataLength,
       infiniteNext,
       infiniteHasMore,
@@ -824,6 +826,7 @@ export default class Autosuggest extends Component {
         theme={mapToAutowhateverTheme(theme)}
         id={id}
         ref={this.storeAutowhateverRef}
+        isInfiniteScroll={isInfiniteScroll}
         infiniteDataLength={infiniteDataLength}
         infiniteNext={infiniteNext}
         infiniteHasMore={infiniteHasMore}

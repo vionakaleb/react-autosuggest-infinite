@@ -52,6 +52,7 @@ export default class Autowhatever extends Component {
       PropTypes.object,
       PropTypes.array,
     ]),
+    isInfiniteScroll: PropTypes.bool,
     infiniteDataLength: PropTypes.number,
     infiniteNext: PropTypes.func,
     infiniteHasMore: PropTypes.bool,
@@ -86,6 +87,7 @@ export default class Autowhatever extends Component {
     highlightedSectionIndex: null,
     highlightedItemIndex: null,
     theme: defaultTheme,
+    isInfiniteScroll: false,
     infiniteDataLength: null,
     infiniteNext: () => {
       throw new Error('`next` must be provided');
@@ -216,6 +218,7 @@ export default class Autowhatever extends Component {
       highlightedSectionIndex,
       highlightedItemIndex,
       itemProps,
+      isInfiniteScroll,
       infiniteDataLength,
       infiniteNext,
       infiniteHasMore,
@@ -263,14 +266,15 @@ export default class Autowhatever extends Component {
             theme={theme}
             keyPrefix={keyPrefix}
             ref={this.storeItemsListReference}
-            dataLength={infiniteDataLength}
-            next={infiniteNext}
-            hasMore={infiniteHasMore}
-            loader={infiniteLoader}
-            endMessage={infiniteEndMessage}
-            className={infiniteClassName}
-            inverse={infiniteInverse}
-            scrollableTarget={infiniteScrollableTarget}
+            isInfiniteScroll={isInfiniteScroll}
+            infiniteDataLength={infiniteDataLength}
+            infiniteNext={infiniteNext}
+            infiniteHasMore={infiniteHasMore}
+            infiniteLoader={infiniteLoader}
+            infiniteEndMessage={infiniteEndMessage}
+            infiniteClassName={infiniteClassName}
+            infiniteInverse={infiniteInverse}
+            infiniteScrollableTarget={infiniteScrollableTarget}
           />
         </div>
       );
