@@ -51,8 +51,7 @@ export default class Item extends Component {
   };
 
   render() {
-    const { isHighlighted, item, renderItem, renderItemData, ...restProps } =
-      this.props;
+    const { isHighlighted, item, renderItem, renderItemData, ...restProps } = this.props;
 
     delete restProps.sectionIndex;
     delete restProps.itemIndex;
