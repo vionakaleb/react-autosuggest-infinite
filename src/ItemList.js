@@ -76,19 +76,19 @@ export default class ItemsList extends Component {
     return (
       <ul
         role="listbox"
-        id={idListContainer}
+        id={idListContainer || 'infinite-scroll-container'}
         {...theme(`${sectionPrefix}items-list`, 'itemsList')}
       >
         {isInfiniteScroll ?
           <InfiniteScroll
-            dataLength={infiniteDataLength}
+            dataLength={infiniteDataLength || 10}
             next={infiniteNext}
-            hasMore={infiniteHasMore}
+            hasMore={infiniteHasMore || true}
             loader={infiniteLoader}
             endMessage={infiniteEndMessage}
-            className={infiniteClassName}
+            className={infiniteClassName || 'infinite-container'}
             inverse={infiniteInverse}
-            scrollableTarget={infiniteScrollableTarget}
+            scrollableTarget={infiniteScrollableTarget || 'infinite-scroll-container'}
           >
             {items.map((item, itemIndex) => {
               const isFirst = itemIndex === 0;

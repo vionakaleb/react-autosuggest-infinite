@@ -1,6 +1,6 @@
 {
   "name": "react-autosuggest-infinite",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Moroshko's react-autosuggest (v10.1.0), implemented with react-infinite-scroll-component (v6.1.0)",
   "main": "dist/index.js",
   "repository": {
