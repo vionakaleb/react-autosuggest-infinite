@@ -52,6 +52,7 @@ export default class Autowhatever extends Component {
       PropTypes.object,
       PropTypes.array,
     ]),
+    idListContainer: PropTypes.string,
     isInfiniteScroll: PropTypes.bool,
     infiniteDataLength: PropTypes.number,
     infiniteNext: PropTypes.func,
@@ -87,17 +88,18 @@ export default class Autowhatever extends Component {
     highlightedSectionIndex: null,
     highlightedItemIndex: null,
     theme: defaultTheme,
+    idListContainer: 'infinite-scroll-container',
     isInfiniteScroll: false,
-    infiniteDataLength: null,
+    infiniteDataLength: 10,
     infiniteNext: () => {
       throw new Error('`next` must be provided');
     },
-    infiniteHasMore: false,
+    infiniteHasMore: true,
     infiniteLoader: null,
     infiniteEndMessage: null,
-    infiniteClassName: '',
+    infiniteClassName: 'infinite-container',
     infiniteInverse: false,
-    infiniteScrollableTarget: null,
+    infiniteScrollableTarget: 'infinite-scroll-container',
   };
 
   constructor(props) {
@@ -218,6 +220,7 @@ export default class Autowhatever extends Component {
       highlightedSectionIndex,
       highlightedItemIndex,
       itemProps,
+      idListContainer,
       isInfiniteScroll,
       infiniteDataLength,
       infiniteNext,
@@ -266,6 +269,7 @@ export default class Autowhatever extends Component {
             theme={theme}
             keyPrefix={keyPrefix}
             ref={this.storeItemsListReference}
+            idListContainer={idListContainer}
             isInfiniteScroll={isInfiniteScroll}
             infiniteDataLength={infiniteDataLength}
             infiniteNext={infiniteNext}

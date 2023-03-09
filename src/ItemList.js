@@ -16,6 +16,7 @@ export default class ItemsList extends Component {
     getItemId: PropTypes.func.isRequired,
     theme: PropTypes.func.isRequired,
     keyPrefix: PropTypes.string.isRequired,
+    idListContainer: PropTypes.string,
     isInfiniteScroll: PropTypes.bool,
     infiniteDataLength: PropTypes.number,
     infiniteNext: PropTypes.func,
@@ -55,6 +56,7 @@ export default class ItemsList extends Component {
       getItemId,
       theme,
       keyPrefix,
+      idListContainer,
       isInfiniteScroll,
       infiniteDataLength,
       infiniteNext,
@@ -74,7 +76,7 @@ export default class ItemsList extends Component {
     return (
       <ul
         role="listbox"
-        id="infinite-scroll-container"
+        id={idListContainer}
         {...theme(`${sectionPrefix}items-list`, 'itemsList')}
       >
         {isInfiniteScroll ?
